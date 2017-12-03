@@ -30,4 +30,13 @@ class Test20171202 < Minitest::Test
     assert_equal 18, December2.checksum(ss)
     
   end
+
+  def test_checksum2
+    ss = '5 9 2 8
+9 4 7 3
+3 8 6 5'
+
+    assert_equal 9, December2.checksum2(ss)
+    
+  end
 end
