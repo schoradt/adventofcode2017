@@ -6,5 +6,5 @@ require_relative './2017/December2'
 module AdventOfCode
   ##
   # Version number of the project
-  VERSION  = "2017.2"
+  VERSION  = "2017.2.1"
 end
