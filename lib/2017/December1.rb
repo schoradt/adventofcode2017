@@ -1,6 +1,9 @@
-
-
+##
+# This class is the advent of code excercise for December the 1 2017.
 class December1
+  ##
+  # The function computes the sum of integers from the string, 
+  # that matches its predecessor.
   def December1.sumMatching(text)
     sum = 0
 
