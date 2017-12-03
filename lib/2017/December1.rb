@@ -9,8 +9,6 @@ class December1
     text.each_char do |char|
     	number = char.to_i
 
-    	puts number
-
     	if number == lastNumber then
     		sum += lastNumber
     	end
@@ -20,9 +18,9 @@ class December1
 
   	number = text[0].to_i
 
-	if number == lastNumber then
-		sum += lastNumber
-	end
+  	if number == lastNumber then
+  		sum += lastNumber
+  	end
 
     sum
   end
