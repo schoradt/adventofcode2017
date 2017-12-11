@@ -18,6 +18,17 @@ class SpiralStore
   		return ss
   	end
 
+	def SpiralStore.fillNeigbored(maxValue)
+   		ss = SpiralStore.new
+
+   		v = ss.add
+   		until ss.lastAddress >= maxAddress do
+  			ss.addDimen
+  		end
+
+  		return ss
+  	end  	
+
   	def lastAddress
   		if @dimen == 0 then
   			return 0
