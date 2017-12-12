@@ -6,7 +6,9 @@ c = December6.new(text)
 
 steps = 0
 
-while c.redistribute do
+cycle = 0
+
+while (cycle = c.redistribute) == 0  do
   #puts "#{steps}: position #{actual}"
   
   steps += 1
@@ -14,4 +16,4 @@ end
 
 steps += 1
 
-puts "loop in redistribute after #{steps} steps"
+puts "loop in redistribute after #{steps} steps with a cycle of #{cycle}"

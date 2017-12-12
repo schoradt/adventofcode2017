@@ -39,12 +39,14 @@ class December6
     
     hash = @banks.join('|')
     
-    if @configs[hash] != nil then
-      return false
+    @configs.each_key do |key|
+      @configs[key] += 1
+    end  
+    
+    if @configs[hash] == nil then
+      @configs[hash] = 0
     end
     
-    @configs[hash] = 0
-    
-    return true
+    return @configs[hash]
   end
 end
