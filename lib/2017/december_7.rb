@@ -66,9 +66,12 @@ class December7
           weights[w].push(c)
         end
       end
+      res = true
       
       if weights.keys.length > 1 then
         puts "node #{@name} is unbalanced"
+      
+        res = false
         
         weights.each_key do |w| 
           puts "    #{w} -> " 
@@ -82,7 +85,7 @@ class December7
         end
       end
       
-      return true
+      return res
     end
   end
   
@@ -94,30 +97,17 @@ class December7
       
       data = line.split
       
-      puts "parse line #{data}"
-      
       name = data[0]
-      
-      #puts "Test #{nodes}"
       
       node = nodes[name]
       
-      #puts "  Node #{node}"
-      
       if node == nil then
-        puts "    create node '#{name}'"
-        
         node = Node.new(name)
         
         nodes[name] = node
-      else
-        puts "    found node '#{name}'"
       end
       
       weight = data[1].delete('()').to_i
-      
-      puts "    set weight #{weight}"
-      
       node.set_weight(weight)
       
       if data.length > 2 then
@@ -127,13 +117,9 @@ class December7
           child = nodes[cname]
 
           if child == nil then
-            puts "        create node '#{cname}'"
-            
             child = Node.new(cname)
 
             nodes[cname] = child
-          else
-            puts "        found node '#{cname}'"
           end
 
           node.add_child(child)
@@ -146,8 +132,6 @@ class December7
     nodes.each_key do |name| 
       if nodes[name].parent == nil then
         @root = nodes[name]
-        
-        puts "set root #{name}"
       end
     end
   end
