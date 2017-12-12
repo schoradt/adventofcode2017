@@ -8,33 +8,33 @@ class SpiralStore
     @dimen = 0
   end
 
-  def SpiralStore.fill_spirals_to(max_address)
-    ss = SpiralStore.new
-
-    until ss.last_address >= max_address do
-      ss.add_dimen
+  def set(address, value)
+    until last_address >= address do
+      add_dimen
     end
-
-    return ss
+    
+    x = x(address)
+    y = y(address)
+    
+    if x == nil || y == nil then
+      puts "error in setting value to #{address}"
+      
+      return nil
+    end
+    
+    @store[x][y] = value 
   end
-
-	def SpiralStore.fill_neigbored(max_value)
-    ss = SpiralStore.new
-
-    v = ss.add
-    until ss.last_address >= maxAddress do
-      ss.add_dimen
+  
+  def get(address)
+    if address > last_address then
+      return nil
     end
-
-    return ss
-  end  	
-
-  def last_address
-    if @dimen == 0 then
-      return 0
-    end
-
-    return @store[-1][-1]
+    
+    return @store[x(address)][y(address)]
+  end
+  
+  def last_address()
+    return @store.length ** 2
   end
 
   def dimen
@@ -42,14 +42,10 @@ class SpiralStore
   end
 
   def add_dimen
-    addr = self.last_address
-
-    addr += 1
-
     s = @store.length
 
     if s == 0 then
-      @store.push([1])
+      @store.push([nil])
 
       @dimen += 1
 
@@ -58,9 +54,7 @@ class SpiralStore
 
     (s - 1).downto(0) do |i|
       #puts "push in line #{i} #{addr}"
-      @store[i].push(addr)
-
-      addr  += 1
+      @store[i].push(nil)
     end
 
     n1 = Array.new(s + 2) { 0 }
@@ -70,17 +64,13 @@ class SpiralStore
     (s + 1).downto(0) do |i|
       #puts "set in col #{i} #{addr}"
         
-      n1[i] = addr
-        
-      addr  += 1
+      n1[i] = nil
     end
   		
     for i in 0..s-1
       #puts "unshift in line #{i} #{addr}"
 
-      @store[i].unshift(addr)
-
-      addr  += 1
+      @store[i].unshift(nil)
     end
 
     n2 = Array.new(s + 2) { 0 }
@@ -90,9 +80,7 @@ class SpiralStore
 		for j in 0..(s + 1)
 			#puts "set in col #{i} #{addr}"
 
-      n2[j] = addr
-
-      addr  += 1
+      n2[j] = nil
     end
 
     @store.unshift(n1)
@@ -105,7 +93,15 @@ class SpiralStore
     return @store
   end
 
-  def address(x, y)
+  def value(x, y)
+    if x < 0 || y < 0 then
+      return 0
+    end
+    
+    if x >= @store.length || y >= @store.length then
+      return 0
+    end
+    
     return @store[x][y]
   end
 
@@ -119,31 +115,48 @@ class SpiralStore
     end
 
     x1 = @dimen - 1
-    y1 = @dimen - 1
-
+    
     d = 1
+    kl = 1
 
-    until self.address(x1 + d, y1 + d) >= v do 
+    until kl**2 >= v do 
       d += 1
+      kl += 2
     end
 
-    (0).upto(d + 2) do |i|
-      if self.address(x1 + d, y1 + d - i) == v then
+    d = d - 1
+    
+    #puts "X0 #{x1} #{d}"
+    
+    a = (kl)**2
+    #puts "X1 #{a} #{kl}"
+    (0).upto(kl - 1) do |i|
+      if a - i == v then
         return x1 + d
       end
-
-      if self.address(x1 - d, y1 + d - i) == v then
+    end
+    
+    a = a - (kl - 1)
+    #puts "X2 #{a} #{kl}"
+    (0).upto(kl - 1) do |i|
+      if a - i == v then
+        return x1 + d - i
+      end
+		end
+    
+    a = a - (kl - 1)
+    #puts "X3 #{a} #{kl}"
+    (0).upto(kl - 1) do |i|
+      if a - i == v then
         return x1 - d
       end
     end
-
-    (0).upto(d + 2) do |i|
-      if self.address(x1 + d - i, y1 - d) == v then
-        return x1 + d - i
-      end
-
-      if self.address(x1 + d - i, y1 + d) == v then
-        return x1 + d - i
+    
+    a = a - (kl - 1)
+    #puts "X4 #{a} #{kl}"
+    (0).upto(kl - 1) do |i|
+      if a - i == v then
+        return x1 - d + i
       end
 		end
   		
@@ -159,31 +172,46 @@ class SpiralStore
       return nil
     end
 
-    x1 = @dimen - 1
     y1 = @dimen - 1
-
+    
     d = 1
+    kl = 1
 
-    until self.address(x1 + d, y1 + d) >= v do 
+    until (kl)**2 >= v do 
       d += 1
+      kl += 2
     end
 
-    (0).upto(d + 2) do |i|
-      if self.address(x1 + d, y1 + d - i) == v then
-        return y1 + d - i
-      end
-
-      if self.address(x1 - d, y1 + d - i) == v then
+    d = d - 1 
+    
+    a = (kl)**2
+    
+    (0).upto(kl -1) do |i|
+      if a - i == v then
         return y1 + d - i
       end
     end
-
-    (0).upto(d + 2) do |i|
-      if self.address(x1 + d - i, y1 - d) == v then
+    
+    a = a - (kl -1)
+    
+    (0).upto(kl -1) do |i|
+      if a - i == v then
         return y1 - d
       end
-
-      if self.address(x1 + d - i, y1 + d) == v then
+		end
+    
+    a = a - (kl -1)
+    
+    (0).upto(kl -1) do |i|
+      if a - i == v then
+        return y1 - d + i
+      end
+    end
+    
+    a = a - (kl -1)
+    
+    (0).upto(kl -1) do |i|
+      if a - i == v then
         return y1 + d
       end
 		end
