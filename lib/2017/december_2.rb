@@ -9,7 +9,7 @@ class December2
   def December2.checksum(text)
     sum = 0
 
-    ss = December2.parseSpreadsheet(text)
+    ss = December2.parse_spreadsheet(text)
 
     ss.each do |line|
       cs = line.max - line.min
@@ -29,10 +29,10 @@ class December2
   def December2.checksum2(text)
     sum = 0
 
-    ss = December2.parseSpreadsheet(text)
+    ss = December2.parse_spreadsheet(text)
 
     ss.each do |line|
-      cs = December2.computeLine2(line)
+      cs = December2.compute_line_2(line)
 
       sum += cs
     end
@@ -40,7 +40,7 @@ class December2
     return sum
   end
 
-  def December2.computeLine2(line)
+  def December2.compute_line_2(line)
     line.each_with_index do |number, index|
       line.last(line.length - index - 1).each do |number2|
         if number > number2 then
@@ -60,11 +60,11 @@ class December2
 
   ##
   # The functions parses the +text+ into an array of arrays representing the spreadsheet.
-  def December2.parseSpreadsheet(text)
+  def December2.parse_spreadsheet(text)
     ss = [];
 
     text.each_line do |line|
-      ss.push(December2.parseLine(line))
+      ss.push(December2.parse_line(line))
     end
 
     ss
@@ -72,7 +72,7 @@ class December2
 
   ##
   # The functions parses +line+ into an array of integers.
-  def December2.parseLine(line)
+  def December2.parse_line(line)
     line.split(" ").map(&:to_i)
   end
 

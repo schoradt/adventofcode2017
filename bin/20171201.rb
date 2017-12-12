@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 
-require 'AdventOfCode';
+rrequire 'advent_of_code';
 
 text = File.read('data/20171201.txt')
 

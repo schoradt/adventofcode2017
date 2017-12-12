@@ -4,25 +4,25 @@ class December1
   ##
   # The function computes the sum of integers from the string, 
   # that matches its predecessor.
-  def December1.sumMatching(text)
+  def December1.sum_matching(text)
     sum = 0
 
-    lastNumber = 0
+    last_number = 0
 
     text.each_char do |char|
     	number = char.to_i
 
-    	if number == lastNumber then
-    		sum += lastNumber
+    	if number == last_number then
+    		sum += last_number
     	end
 
-    	lastNumber = number;
+    	last_number = number;
   	end
 
   	number = text[0].to_i
 
-  	if number == lastNumber then
-  		sum += lastNumber
+  	if number == last_number then
+  		sum += last_number
   	end
 
     sum
@@ -31,7 +31,7 @@ class December1
   ##
   # The function computes the sum of integers from the string, 
   # that matches half list around predecessor.
-  def December1.sumMatching2(text)
+  def December1.sum_matching_2(text)
     sum = 0
 
     line = [];
@@ -40,21 +40,19 @@ class December1
       line.push(char.to_i)
     end    
 
-    lastNumber = 0
-
-    checkIndex = line.length / 2
+    check_index = line.length / 2
 
     line.each_with_index do |number, index|
-      check = line[checkIndex]
+      check = line[check_index]
 
       if number == check then
         sum += number
       end
 
-      checkIndex += 1
+      check_index += 1
 
-      if checkIndex == line.length then
-        checkIndex = 0
+      if check_index == line.length then
+        check_index = 0
       end
     end
 
