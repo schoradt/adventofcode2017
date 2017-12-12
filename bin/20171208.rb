@@ -10,4 +10,4 @@ puts "Maximum register value is #{max}"
 
 max = p.highest_value
 
-puts "Highestr register value is #{max}"
+puts "Highest register value is #{max}"
