@@ -6,9 +6,7 @@ c = December6.new(text)
 
 steps = 0
 
-cycle = 0
-
-while (cycle = c.redistribute) == 0
+while (cycle = c.redistribute).zero
   # puts "#{steps}: position #{actual}"
 
   steps += 1

@@ -12,4 +12,5 @@ RDoc::Task.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
 end
 
+desc 'Run RuboCop on the lib directory'
 RuboCop::RakeTask.new
