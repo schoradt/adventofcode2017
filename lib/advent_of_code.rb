@@ -6,6 +6,7 @@ require_relative './2017/december_5'
 require_relative './2017/december_6'
 require_relative './2017/december_7'
 require_relative './2017/december_8'
+require_relative './2017/december_9'
 
 ##
 # This class is the main entry point for the advent of code in ruby
