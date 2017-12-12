@@ -1,6 +1,6 @@
-require "minitest/autorun"
+require 'minitest/autorun'
 
-require 'advent_of_code';
+require 'advent_of_code'
 
 class Test20171201 < Minitest::Test
   def test_sums

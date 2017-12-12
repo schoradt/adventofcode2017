@@ -5,48 +5,42 @@
 class December6
   def initialize(text)
     @banks = text.split.map(&:to_i)
-    
+
     @configs = {}
   end
-  
-  def banks 
-    return @banks
-  end
-  
+
+  attr_reader :banks
+
   def redistribute
     index = 0
     blocks = 0
-    
+
     @banks.each_with_index do |block_value, block_index|
-      if block_value > blocks then
+      if block_value > blocks
         index = block_index
         blocks = block_value
       end
     end
-    
+
     @banks[index] = 0
-    
-    until blocks == 0 do
+
+    until blocks == 0
       index += 1
-      
-      if index == @banks.length then
-        index = 0
-      end
-      
+
+      index = 0 if index == @banks.length
+
       @banks[index] += 1
       blocks -= 1
     end
-    
+
     hash = @banks.join('|')
-    
+
     @configs.each_key do |key|
       @configs[key] += 1
-    end  
-    
-    if @configs[hash] == nil then
-      @configs[hash] = 0
     end
-    
-    return @configs[hash]
+
+    @configs[hash] = 0 if @configs[hash].nil?
+
+    @configs[hash]
   end
 end

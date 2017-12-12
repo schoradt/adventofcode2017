@@ -6,137 +6,122 @@ class December7
   class Node
     def initialize(name)
       @name = name
-      
+
       @childs = []
-      
+
       @parent = nil
-      
+
       @weight = 0
     end
-    
-    def name
-      return @name
-    end
-    
-    def parent
-      return @parent
-    end
-    
-    def weight
-      return @weight
-    end
-    
+
+    attr_reader :name
+
+    attr_reader :parent
+
+    attr_reader :weight
+
     def set_parent(parent)
-      if @parent != nil then
-        raise "parent already set"
-      end
-      
+      raise 'parent already set' unless @parent.nil?
+
       @parent = parent
     end
-    
+
     def set_weight(weight)
       @weight = weight
     end
-    
+
     def add_child(child)
       child.set_parent(self)
-      
+
       @childs.push(child)
     end
-    
+
     def tree_weight
       weight = @weight
-      
+
       @childs.each { |c| weight += c.tree_weight }
-      
-      return weight
+
+      weight
     end
-      
+
     def check_balance
       weights = {}
-      
+
       puts "check balance of node #{@name}"
-      
-      @childs.each do |c| 
+
+      @childs.each do |c|
         w = c.tree_weight
-        
-        if weights[w] == nil then
-          weights[w] = [ c ]
+
+        if weights[w].nil?
+          weights[w] = [c]
         else
           weights[w].push(c)
         end
       end
       res = true
-      
-      if weights.keys.length > 1 then
+
+      if weights.keys.length > 1
         puts "node #{@name} is unbalanced"
-      
+
         res = false
-        
-        weights.each_key do |w| 
-          puts "    #{w} -> " 
-          weights[w].each { |n| puts "            " + n.weight.to_s }
+
+        weights.each_key do |w|
+          puts "    #{w} -> "
+          weights[w].each { |n| puts '            ' + n.weight.to_s }
         end
       end
-      
-      weights.each_key do |w| 
-        if weights[w].length == 1 then
-          weights[w][0].check_balance
-        end
+
+      weights.each_key do |w|
+        weights[w][0].check_balance if weights[w].length == 1
       end
-      
-      return res
+
+      res
     end
   end
-  
+
   def initialize(text)
     nodes = {}
-    
-    text.each_line do |line| 
-      #puts "parse line #{line}"
-      
+
+    text.each_line do |line|
+      # puts "parse line #{line}"
+
       data = line.split
-      
+
       name = data[0]
-      
+
       node = nodes[name]
-      
-      if node == nil then
+
+      if node.nil?
         node = Node.new(name)
-        
+
         nodes[name] = node
       end
-      
+
       weight = data[1].delete('()').to_i
       node.set_weight(weight)
-      
-      if data.length > 2 then
-        3.upto(data.length - 1) do |i|
-          cname = data[i].chomp(',')
 
-          child = nodes[cname]
+      next unless data.length > 2
+      3.upto(data.length - 1) do |i|
+        cname = data[i].chomp(',')
 
-          if child == nil then
-            child = Node.new(cname)
+        child = nodes[cname]
 
-            nodes[cname] = child
-          end
+        if child.nil?
+          child = Node.new(cname)
 
-          node.add_child(child)
+          nodes[cname] = child
         end
+
+        node.add_child(child)
       end
     end
-    
+
     @root = nil
-    
-    nodes.each_key do |name| 
-      if nodes[name].parent == nil then
-        @root = nodes[name]
-      end
+
+    nodes.each_key do |name|
+      @root = nodes[name] if nodes[name].parent.nil?
     end
   end
-  
-  def root
-    return @root
-  end
+
+  attr_reader :root
 end

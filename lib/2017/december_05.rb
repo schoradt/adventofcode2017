@@ -6,48 +6,38 @@ class December5
   def initialize(text)
     @jumps = text.split.map(&:to_i)
   end
-  
-  def jumps
-    return @jumps
-  end
-  
+
+  attr_reader :jumps
+
   def process(pos)
-    if pos < 0 || pos >= @jumps.length then
-      return -1
-    end
-    
+    return -1 if pos < 0 || pos >= @jumps.length
+
     steps = @jumps[pos]
-    
+
     @jumps[pos] += 1
-    
+
     n = pos + steps
-    
-    if n < 0 || n >= @jumps.length then
-      return -1
-    end
-    
-    return n
+
+    return -1 if n < 0 || n >= @jumps.length
+
+    n
   end
-  
+
   def process2(pos)
-    if pos < 0 || pos >= @jumps.length then
-      return -1
-    end
-    
+    return -1 if pos < 0 || pos >= @jumps.length
+
     steps = @jumps[pos]
-    
-    if (@jumps[pos] >= 3) then
+
+    if @jumps[pos] >= 3
       @jumps[pos] -= 1
     else
       @jumps[pos] += 1
     end
-    
+
     n = pos + steps
-    
-    if n < 0 || n >= @jumps.length then
-      return -1
-    end
-    
-    return n
+
+    return -1 if n < 0 || n >= @jumps.length
+
+    n
   end
 end

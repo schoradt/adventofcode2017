@@ -1,6 +1,6 @@
-require "minitest/autorun"
+require 'minitest/autorun'
 
-require 'advent_of_code';
+require 'advent_of_code'
 
 class Test20171207 < Minitest::Test
   def test_parse
@@ -17,11 +17,11 @@ jptl (61)
 ugml (68) -> gyxo, ebii, jptl
 gyxo (61)
 cntj (57)'
-    
+
     c = December7.new(s)
-    
+
     assert_equal 'tknk', c.root.name
-    
-    #assert_equal false, c.root.check_balance
+
+    # assert_equal false, c.root.check_balance
   end
 end

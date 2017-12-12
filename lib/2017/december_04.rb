@@ -3,33 +3,29 @@
 # and open the template in the editor.
 
 class December4
-  def December4.check_passphrase(line)
-    words = Hash.new
-    
+  def self.check_passphrase(line)
+    words = {}
+
     line.split.each do |word|
-      if words[word] != nil then
-        return false
-      end
-      
+      return false unless words[word].nil?
+
       words[word] = 1
     end
-    
-    return true
+
+    true
   end
-  
-  def December4.check_passphrase_2(line)
-    words = Hash.new
-    
+
+  def self.check_passphrase_2(line)
+    words = {}
+
     line.split.each do |word|
       hash = word.chars.sort.join
-      
-      if words[hash] != nil then
-        return false
-      end
-      
+
+      return false unless words[hash].nil?
+
       words[hash] = 1
     end
-    
-    return true
+
+    true
   end
 end

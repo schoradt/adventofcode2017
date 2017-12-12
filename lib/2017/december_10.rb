@@ -5,62 +5,51 @@
 class December10
   def initialize(size)
     @data = Array.new(size) { |index| index }
-    
+
     @pos = 0
     @skip = 0
   end
-  
+
   def cycle(length)
-    if length > @data.length then 
-      return false
-    end
-    
+    return false if length > @data.length
+
     reverse(length)
-    
+
     @pos += length
     @pos += @skip
-    
-    while @pos >= @data.length do
-      @pos = @pos - @data.length
-    end
-    
+
+    @pos -= @data.length while @pos >= @data.length
+
     @skip += 1
-    
-    return true
+
+    true
   end
-  
-  def hash 
-    return @data[0] * @data[1]
+
+  def hash
+    @data[0] * @data[1]
   end
-  
-  def data
-    return @data
-  end
-  
-  def pos
-    return @pos
-  end
-  
+
+  attr_reader :data
+
+  attr_reader :pos
+
   private
+
   def reverse(size)
     r = @data.slice(@pos, size)
-    
-    if r.length < size then
-      r.concat(@data.slice(0, size - r.length))
-    end
-    
+
+    r.concat(@data.slice(0, size - r.length)) if r.length < size
+
     r.reverse!
-    
+
     p = @pos
-    
+
     r.each_index do |i|
       @data[p] = r[i]
-      
+
       p += 1
-      
-      if p == @data.length then
-        p = 0
-      end
+
+      p = 0 if p == @data.length
     end
   end
 end

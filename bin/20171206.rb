@@ -1,4 +1,4 @@
-require 'advent_of_code';
+require 'advent_of_code'
 
 text = File.read('data/20171206.txt')
 
@@ -8,9 +8,9 @@ steps = 0
 
 cycle = 0
 
-while (cycle = c.redistribute) == 0  do
-  #puts "#{steps}: position #{actual}"
-  
+while (cycle = c.redistribute) == 0
+  # puts "#{steps}: position #{actual}"
+
   steps += 1
 end
 

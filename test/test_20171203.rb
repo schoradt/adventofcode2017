@@ -1,6 +1,6 @@
-require "minitest/autorun"
+require 'minitest/autorun'
 
-require 'advent_of_code';
+require 'advent_of_code'
 
 class Test20171203 < Minitest::Test
   def test_build
@@ -9,15 +9,15 @@ class Test20171203 < Minitest::Test
     assert_equal 0, ss.dimen
     assert_equal [], ss.store
 
-    ss.add_dimen()
-      
-    (1).upto(10) do |i|
-      #puts ss.store.to_s
-      
+    ss.add_dimen
+
+    1.upto(10) do |i|
+      # puts ss.store.to_s
+
       assert_equal i, ss.dimen
       assert_equal ss.store.length**2, ss.last_address
-      
-      ss.add_dimen()
+
+      ss.add_dimen
     end
   end
 
@@ -39,20 +39,18 @@ class Test20171203 < Minitest::Test
 
     assert_equal 0, ss.x(4)
     assert_equal 1, ss.y(4)
-    
+
     ss.add_dimen
-    
+
     assert_equal [[nil, nil, nil, nil, nil], [nil, 5, 4, 3, nil], [nil, 6, 1, 2, nil], [nil, 7, 8, 9, nil], [nil, nil, nil, nil, nil]], ss.store
-    
+
     assert_equal 3, ss.x(10)
     assert_equal 4, ss.y(10)
   end
 
-  
   def test_neighbours
     v = December3.fill_neigbored(900)
 
     assert_equal 931, v
-    
   end
 end

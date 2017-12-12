@@ -1,4 +1,4 @@
-require 'advent_of_code';
+require 'advent_of_code'
 
 text = File.read('data/20171209.txt')
 
