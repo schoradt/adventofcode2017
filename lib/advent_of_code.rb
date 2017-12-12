@@ -1,12 +1,13 @@
-require_relative './2017/december_1'
-require_relative './2017/december_2'
-require_relative './2017/december_3'
-require_relative './2017/december_4'
-require_relative './2017/december_5'
-require_relative './2017/december_6'
-require_relative './2017/december_7'
-require_relative './2017/december_8'
-require_relative './2017/december_9'
+require_relative './2017/december_01'
+require_relative './2017/december_02'
+require_relative './2017/december_03'
+require_relative './2017/december_04'
+require_relative './2017/december_05'
+require_relative './2017/december_06'
+require_relative './2017/december_07'
+require_relative './2017/december_08'
+require_relative './2017/december_09'
+require_relative './2017/december_10'
 
 ##
 # This class is the main entry point for the advent of code in ruby
