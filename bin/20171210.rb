@@ -13,3 +13,11 @@ end
 h = hash.hash
 
 puts "Hash is #{h}"
+
+text = File.read('data/20171210.txt')
+
+knot = December10.new(256)
+
+kh = knot.knot_hash(text)
+
+puts "Knot Hash is #{kh}"

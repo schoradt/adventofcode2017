@@ -32,7 +32,19 @@ class December10
   attr_reader :data
 
   attr_reader :pos
+  
+  def knot_hash(text)
+    lengths = prepare_input(text)
+    
+    knot_cycle(lengths)
+    
+    dense = dense_hash
+    
+    hex = dense.map{|x| '%02x'%x}.join
 
+    return hex
+  end
+  
   private
 
   def reverse(size)
@@ -51,5 +63,41 @@ class December10
 
       p = 0 if p == @data.length
     end
+  end
+  
+  def prepare_input(text)
+    a = []
+    
+    text.chars.each do |c|
+      a.push(c.ord)
+    end
+    
+    a.push(17, 31, 73, 47, 23)
+    
+    return a
+  end
+  
+  def knot_cycle(lengths)
+    64.downto(1) do |i|
+      lengths.each do |l|
+        cycle(l)
+      end
+    end
+  end
+  
+  def dense_hash
+    a = []
+    
+    0.upto(15) do |i|
+      x = @data[i*16]
+      
+      1.upto(15) do |j|
+        x = x ^ @data[i * 16 + j]
+      end
+      
+      a.push(x)
+    end
+    
+    return a
   end
 end

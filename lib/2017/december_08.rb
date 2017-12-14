@@ -49,7 +49,7 @@ class December8
 
   private
 
-  def check_condition(left, cond, right)
+  def check_condition(cond, left, right)
     return true if cond == '==' && left == right
     return true if cond == '>=' && left >= right
     return true if cond == '<=' && left <= right
