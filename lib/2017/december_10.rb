@@ -3,7 +3,7 @@
 # and open the template in the editor.
 
 class December10
-  def initialize(size)
+  def initialize(size = 256)
     @data = Array.new(size) { |index| index }
 
     @pos = 0

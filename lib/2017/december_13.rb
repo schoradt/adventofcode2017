@@ -35,6 +35,30 @@ class December13
     return sev
   end
   
+  def process_step2
+    presteps = 0
+    
+    until false do
+      init
+      
+      presteps.downto(1) do |i|
+        delay_step
+      end
+      
+      until done do
+        simulate_step
+      end
+      
+      if @catches.length == 0
+        return presteps
+      end
+      
+      puts "    #{presteps} delay -> #{@catches.length}"
+      
+      presteps += 1
+    end
+  end
+  
   def load(text)
     text.each_line do |line|
       data = line.split
@@ -51,6 +75,7 @@ class December13
   attr_reader :catches
   
   def init
+    @catches.clear
     @positions.clear
     
     @layers.each_index do |i|
@@ -64,6 +89,10 @@ class December13
     end
     
     @packet = -1
+  end
+  
+  def delay_step
+    move_scanners
   end
   
   def simulate_step

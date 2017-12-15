@@ -12,6 +12,6 @@ res1 = sim.process_step1
 
 puts "Step1: #{res1}"
 
-#res2 = graph.process_step2
+res2 = sim.process_step2
 
-#puts "Step1: #{res2}"
+puts "Step2: #{res2}"
