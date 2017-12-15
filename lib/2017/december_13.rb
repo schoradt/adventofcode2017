@@ -5,30 +5,22 @@
 class December13
   def initialize
     @layers = []
-    
-    @positions = []
-    @up = []
-    
-    @catches = []
-    
-    @packet = -1
   end
   
   def process_step1
-    init
+    cs = []
     
-    until done do
-      simulate_step
-      
-      #puts "step --------------"
-      #puts "#{@positions}"
-      #puts "#{@packet}"
-      #puts "#{@catches}"
+    0.upto(@layers.length - 1) do |i|
+      if @layers[i] != nil
+        if (i % (2 * (@layers[i] - 1))) == 0
+          cs.push(i)
+        end
+      end
     end
     
     sev = 0
     
-    @catches.each do |c|
+    cs.each do |c|
       sev += c * @layers[c]
     end
     
@@ -37,23 +29,26 @@ class December13
   
   def process_step2
     presteps = 0
+    cs = []
     
     until false do
-      init
+      cs.clear
       
-      presteps.downto(1) do |i|
-        delay_step
+      if presteps % 1000 == 0
+        puts "    #{presteps}"
       end
       
-      until done do
-        simulate_step
+      0.upto(@layers.length - 1) do |i|
+        if @layers[i] != nil
+          if ((i + presteps) % (2 * (@layers[i] - 1))) == 0
+            cs.push(i)
+          end
+        end
       end
       
-      if @catches.length == 0
+      if cs.length == 0
         return presteps
       end
-      
-      puts "    #{presteps} delay -> #{@catches.length}"
       
       presteps += 1
     end
@@ -71,75 +66,4 @@ class December13
   end
   
   attr_reader :layers
-  attr_reader :positions
-  attr_reader :catches
-  
-  def init
-    @catches.clear
-    @positions.clear
-    
-    @layers.each_index do |i|
-      if @layers[i] != nil
-        @positions[i] = 0
-      else
-        @positions[i] = -1
-      end
-      
-      @up[i] = true
-    end
-    
-    @packet = -1
-  end
-  
-  def delay_step
-    move_scanners
-  end
-  
-  def simulate_step
-    move_packet
-    test_catches
-    move_scanners
-  end
-  
-  def done
-    if @packet >= @layers.length
-      return true
-    end
-    
-    return false
-  end
-  
-  private
-  
-  def move_packet
-    @packet += 1
-  end
-  
-  def test_catches
-    if @packet >= 0 && @packet < @positions.length
-      if @positions[@packet] == 0
-        @catches.push(@packet)
-      end
-    end
-  end
-  
-  def move_scanners
-    @layers.each_index do |i|
-      if @layers[i] != nil
-        if @positions[i] == @layers[i] - 1 
-          @up[i] = false
-        end
-        
-        if @positions[i] == 0 
-          @up[i] = true
-        end
-        
-        if @up[i]
-          @positions[i] += 1
-        else
-          @positions[i] -= 1
-        end
-      end
-    end
-  end
 end

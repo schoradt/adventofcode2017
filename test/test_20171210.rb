@@ -2,7 +2,7 @@ require 'minitest/autorun'
 
 require 'advent_of_code'
 
-class Test20171209 < Minitest::Test
+class Test20171210 < Minitest::Test
   def test_hash
     hash = December10.new(5)
 

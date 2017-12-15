@@ -2,7 +2,7 @@ require 'minitest/autorun'
 
 require 'advent_of_code'
 
-class Test20171213 < Minitest::Test
+class Test20171214 < Minitest::Test
   def test_step1
     defrag = December14.new
     

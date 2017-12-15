@@ -2,7 +2,7 @@ require 'minitest/autorun'
 
 require 'advent_of_code'
 
-class Test20171211 < Minitest::Test
+class Test20171212 < Minitest::Test
   def test_step1
     graph = December12.new
     
