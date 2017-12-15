@@ -34,10 +34,6 @@ class December13
     until false do
       cs.clear
       
-      if presteps % 1000 == 0
-        puts "    #{presteps}"
-      end
-      
       0.upto(@layers.length - 1) do |i|
         if @layers[i] != nil
           if ((i + presteps) % (2 * (@layers[i] - 1))) == 0
