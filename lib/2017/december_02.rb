@@ -4,12 +4,12 @@ class December2
   ##
   # Compute the checksum of the spredsheet.
   #
-  # The checksum of the spreadsheet is the sum of the difference of 
+  # The checksum of the spreadsheet is the sum of the difference of
   # the maximum and the minimum of each line.
-  def December2.checksum(text)
+  def self.checksum(text)
     sum = 0
 
-    ss = December2.parseSpreadsheet(text)
+    ss = December2.parse_spreadsheet(text)
 
     ss.each do |line|
       cs = line.max - line.min
@@ -24,47 +24,43 @@ class December2
   # Compute the checksum of the spredsheet.
   #
   # The checksum is the sum of the lines checksums.
-  # The checksum of a line is the division of the two 
+  # The checksum of a line is the division of the two
   # evenly (mod 0) dividable elements of the line.
-  def December2.checksum2(text)
+  def self.checksum2(text)
     sum = 0
 
-    ss = December2.parseSpreadsheet(text)
+    ss = December2.parse_spreadsheet(text)
 
     ss.each do |line|
-      cs = December2.computeLine2(line)
+      cs = December2.compute_line_2(line)
 
       sum += cs
     end
 
-    return sum
+    sum
   end
 
-  def December2.computeLine2(line)
+  def self.compute_line_2(line)
     line.each_with_index do |number, index|
       line.last(line.length - index - 1).each do |number2|
-        if number > number2 then
-          if number % number2 == 0 then
-            return number / number2
-          end
+        if number > number2
+          return number / number2 if number % number2 == 0
         else
-          if number2 % number == 0 then
-            return number2 / number
-          end
+          return number2 / number if number2 % number == 0
         end
       end
     end
 
-    return 0
+    0
   end
 
   ##
   # The functions parses the +text+ into an array of arrays representing the spreadsheet.
-  def December2.parseSpreadsheet(text)
-    ss = [];
+  def self.parse_spreadsheet(text)
+    ss = []
 
     text.each_line do |line|
-      ss.push(December2.parseLine(line))
+      ss.push(December2.parse_line(line))
     end
 
     ss
@@ -72,8 +68,7 @@ class December2
 
   ##
   # The functions parses +line+ into an array of integers.
-  def December2.parseLine(line)
-    line.split(" ").map(&:to_i)
+  def self.parse_line(line)
+    line.split(' ').map(&:to_i)
   end
-
 end

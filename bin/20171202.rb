@@ -1,11 +1,13 @@
-require 'AdventOfCode';
+require 'advent_of_code'
+
+puts "Advent 2017/12/02"
 
 text = File.read('data/20171202.txt')
 
-sum = December2.checksum(text)
+res1 = December2.checksum(text)
 
-puts "checksum: #{sum}"
+puts "Step1: #{res1}"
 
-sum = December2.checksum2(text)
+res2 = December2.checksum2(text)
 
-puts "checksum: #{sum}"
+puts "Step2: #{res2}"
