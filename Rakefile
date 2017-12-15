@@ -14,3 +14,4 @@ end
 
 desc 'Run RuboCop on the lib directory'
 RuboCop::RakeTask.new
+

@@ -1,5 +1,7 @@
 require 'advent_of_code'
 
+puts "Advent 2017/12/10"
+
 text = File.read('data/20171210.txt')
 
 hash = December10.new(256)
@@ -12,7 +14,7 @@ end
 
 h = hash.hash
 
-puts "Hash is #{h}"
+puts "Step 1: #{h}"
 
 text = File.read('data/20171210.txt')
 
@@ -20,4 +22,4 @@ knot = December10.new(256)
 
 kh = knot.knot_hash(text)
 
-puts "Knot Hash is #{kh}"
+puts "Step 2: #{kh}"

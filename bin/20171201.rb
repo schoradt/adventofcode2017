@@ -2,12 +2,15 @@
 
 require 'advent_of_code'
 
+puts "Advent 2017/12/01"
+
 text = File.read('data/20171201.txt')
 
-sum = December1.sumMatching(text)
+res1 = December1.sum_matching(text)
 
-puts "sum of matches : #{sum}"
+puts "Step1: #{res1}"
 
-sum = December1.sumMatching2(text)
+res2 = December1.sum_matching_2(text)
 
-puts "sum of matches 2 : #{sum}"
+puts "Step2: #{res2}"
+

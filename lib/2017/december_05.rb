@@ -9,6 +9,39 @@ class December5
 
   attr_reader :jumps
 
+  def process_step1
+    steps = 0
+
+    actual = 0
+
+    until actual < 0
+      # puts "#{steps}: position #{actual}"
+
+      steps += 1
+
+      actual = process(actual)
+    end
+
+    steps
+  end
+  
+  def process_step2
+    steps = 0
+
+    actual = 0
+
+    until actual < 0
+      # puts "#{steps}: position #{actual}"
+
+      steps += 1
+
+      actual = process2(actual)
+    end
+    
+    steps
+  end
+  
+  
   def process(pos)
     return -1 if pos < 0 || pos >= @jumps.length
 

@@ -44,10 +44,8 @@ class December7
       weight
     end
 
-    def check_balance
+    def check_balance(diff = 0)
       weights = {}
-
-      puts "check balance of node #{@name}"
 
       @childs.each do |c|
         w = c.tree_weight
@@ -58,24 +56,30 @@ class December7
           weights[w].push(c)
         end
       end
-      res = true
 
+      wall = 0
+      wmis = 0
+      
       if weights.keys.length > 1
-        puts "node #{@name} is unbalanced"
-
-        res = false
-
         weights.each_key do |w|
-          puts "    #{w} -> "
-          weights[w].each { |n| puts '            ' + n.weight.to_s }
+          wmis = w if weights[w].length == 1
+          wall = w if weights[w].length > 1
+        end
+        
+        weights.each_key do |w|
+          if weights[w].length == 1
+            res = weights[w][0].check_balance()
+
+            if res == 0
+              return  weights[w][0].weight + (wall - wmis)
+            end 
+            
+            return res
+          end
         end
       end
 
-      weights.each_key do |w|
-        weights[w][0].check_balance if weights[w].length == 1
-      end
-
-      res
+      return 0
     end
   end
 
@@ -123,5 +127,13 @@ class December7
     end
   end
 
+  def process_step1
+    root.name
+  end
+  
+  def process_step2
+    root.check_balance
+  end
+  
   attr_reader :root
 end

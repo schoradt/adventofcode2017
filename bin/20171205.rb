@@ -1,35 +1,17 @@
 require 'advent_of_code'
 
+puts "Advent 2017/12/05"
+
 text = File.read('data/20171205.txt')
 
 c = December5.new(text)
 
-steps = 0
+res1 = c.process_step1
 
-actual = 0
-
-until actual < 0
-  # puts "#{steps}: position #{actual}"
-
-  steps += 1
-
-  actual = c.process(actual)
-end
-
-puts "processor jumps out after #{steps} steps"
+puts "Step 1: #{res1}"
 
 c = December5.new(text)
 
-steps = 0
+res2 = c.process_step2
 
-actual = 0
-
-until actual < 0
-  # puts "#{steps}: position #{actual}"
-
-  steps += 1
-
-  actual = c.process2(actual)
-end
-
-puts "processor jumps out after #{steps} steps"
+puts "Step 2: #{res2}"

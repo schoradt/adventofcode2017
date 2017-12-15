@@ -1,17 +1,17 @@
 require 'advent_of_code'
 
+puts "Advent 2017/12/06"
+
 text = File.read('data/20171206.txt')
 
 c = December6.new(text)
 
-steps = 0
+res1 = c.process_step1
 
-while (cycle = c.redistribute).zero
-  # puts "#{steps}: position #{actual}"
+puts "Step 1: #{res1}"
 
-  steps += 1
-end
+c = December6.new(text)
 
-steps += 1
+res2 = c.process_step2
 
-puts "loop in redistribute after #{steps} steps with a cycle of #{cycle}"
+puts "Step 2: #{res2}"

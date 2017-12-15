@@ -11,6 +11,24 @@ class December6
 
   attr_reader :banks
 
+  def process_step1
+    steps = 1
+
+    while redistribute == 0
+      steps += 1
+    end
+
+    steps
+  end
+  
+  def process_step2
+    while (cycle = redistribute) == 0
+      
+    end
+    
+    cycle
+  end
+  
   def redistribute
     index = 0
     blocks = 0

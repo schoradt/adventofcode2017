@@ -1,19 +1,16 @@
 require 'advent_of_code'
 
+puts "Advent 2017/12/04"
+
 text = File.read('data/20171204.txt')
 
-valid = 0
+checker = December4.new
 
-text.each_line do |line|
-  valid += 1 if December4.check_passphrase(line)
-end
+res1 = checker.process_step1(text)
 
-puts "Valid lines: #{valid}"
+puts "Step 1: #{res1}"
 
-valid = 0
+res2 = checker.process_step2(text)
 
-text.each_line do |line|
-  valid += 1 if December4.check_passphrase_2(line)
-end
+puts "Step 2: #{res2}"
 
-puts "Valid lines: #{valid}"

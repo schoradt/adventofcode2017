@@ -3,7 +3,30 @@
 # and open the template in the editor.
 
 class December4
-  def self.check_passphrase(line)
+  def initialize
+  end
+  
+  def process_step1(text)
+    valid = 0
+
+    text.each_line do |line|
+      valid += 1 if check_passphrase(line)
+    end
+    
+    valid
+  end
+  
+  def process_step2(text)
+    valid = 0
+
+    text.each_line do |line|
+      valid += 1 if check_passphrase_2(line)
+    end
+    
+    valid
+  end
+  
+  def check_passphrase(line)
     words = {}
 
     line.split.each do |word|
@@ -15,7 +38,7 @@ class December4
     true
   end
 
-  def self.check_passphrase_2(line)
+  def check_passphrase_2(line)
     words = {}
 
     line.split.each do |word|
