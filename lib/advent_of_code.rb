@@ -19,5 +19,5 @@ require_relative './2017/december_15'
 module AdventOfCode
   ##
   # Version number of the project
-  VERSION = '2017.5'.freeze
+  VERSION = '2017.15'.freeze
 end
