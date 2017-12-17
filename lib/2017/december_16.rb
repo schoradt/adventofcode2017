@@ -16,17 +16,13 @@ class December16
   end
   
   def spin(size)
-    size.downto(1) do 
-      x = @data.delete_at(-1)
-      @data.unshift(x)
-    end
+    @data = @data.slice!(-size..-1).reverse!.concat(@data) 
+    
     true
   end
   
-  def exchange(x, y)
-    ex = @data[x]
-    @data[x] = @data[y]
-    @data[y] = ex
+  def exchange(a, b)
+    @data[a], @data[b] = @data[b], @data[a]
     
     true
   end
@@ -37,14 +33,32 @@ class December16
     true
   end
   
-  def dance(text)
-    steps = text.split(',')
-    
-    steps.each do |step|
-      parse_step(step)
+  def dance(steps)
+     steps.each do |step|
+      case step[0]
+      when 0
+        spin(step[1])
+      when 1
+        #@data[step[1]], @data[step[2]] = @data[step[2]], @data[step[1]]
+        exchange(step[1], step[2])
+      when 2
+        partner(step[1], step[2])
+      end
     end
     
     true
+  end
+  
+  def prepare(text)
+    steps = text.split(',')
+    
+    res = []
+    
+    steps.each do |step|
+      res.push(parse_step(step))
+    end
+    
+    res
   end
   
   private 
@@ -52,26 +66,31 @@ class December16
   def parse_step(step)
     action = step[0]
     
+    res = [] #.push(action)
+    
     case action
     when 's'
       #puts "s: #{step[1..-1]}"
+      res.push(0)
       x = step[1..-1].to_i
       
-      spin(x)
+      res.push(x)
     when 'x'
-      x = step[1 .. step.index('/') - 1]
-      y = step[step.index('/') + 1..-1]
+      res.push(1)
+      x = step[1 .. step.index('/') - 1].to_i
+      y = step[step.index('/') + 1..-1].to_i
       
-      #puts "x #{x} #{y}"
-      
-      exchange(x.to_i, y.to_i)
+      res.push(x)
+      res.push(y)
     when 'p'
+      res.push(2)
       x = step[1..step.index('/')-1]
       y = step[step.index('/') + 1 .. -1]
       
-      #puts "x #{x} #{y}"
-      
-      partner(x, y)
+      res.push(x)
+      res.push(y)
     end
+    
+    res
   end
 end

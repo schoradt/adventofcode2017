@@ -8,12 +8,25 @@ c = December16.new
 
 c.init('abcdefghijklmnop')
 
-c.dance(text)
+steps = c.prepare(text)
+
+c.dance(steps)
 
 res1 = c.to_s
 
 puts "Step1: #{res1}"
 
-#res2 = December15.new(634, 301).process_step2
+c = December16.new
 
-#puts "Step2: #{res2}"
+c.init('abcdefghijklmnop')
+
+steps = c.prepare(text)
+
+1000000000.downto(0) do |i| 
+  puts "    #{i}" if i % 100 == 0
+  c.dance(steps)
+end
+
+res2 = c.to_s
+
+puts "Step2: #{res2}"
